@@ -1,0 +1,6 @@
+{% for d in object_list %}
+    <img src="{{ d.foto }}" alt="imagen ref">    
+    <p>{{ d.ubicacion }}</p>
+    {% empty %}
+    <p>No hay objetos</p>
+{% endfor %}    

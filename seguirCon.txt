@@ -1,0 +1,6 @@
+Inquilinos
+    view de su depto (contrato[vencimiento, fecha de pago, fecha de aumento], servicios)
+    sistema de notificaciones(bandeja de la app -> enviar notificacion por correo) 
+    lsita de contactos(tarjeta de servicios)
+    apartado de reclamos -> /dev/null
+

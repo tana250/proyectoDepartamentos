@@ -1,0 +1,24 @@
+cuando usar form view?
+Organization of code related to specific HTTP methods (GET, POST, etc.) can be addressed by separate methods
+instead of conditional branching.
+
+Object oriented techniques such as mixins (multiple inheritance) can be used to factor code into reusable components.
+
+
+
+Para un entorno de producción (donde DEBUG = False), Django deja de servir archivos multimedia por 
+razones de seguridad y rendimiento. Aquí los conceptos clave que deberías aplicar:
+Servidor Web Externo: En lugar de Django, utilizás un servidor como Nginx o Apache. 
+Estos están optimizados para entregar archivos estáticos y multimedia directamente desde el disco duro 
+sin pasar por el código de Python.
+Almacenamiento en la Nube (Object Storage): Lo más profesional es no guardar las imágenes en tu propio servidor, 
+sino en servicios como Amazon S3, Google Cloud Storage o DigitalOcean Spaces.
+Librerías de Terceros: Se suele usar una librería llamada django-storages. Esta se conecta con la nube y hace que, 
+cuando pidas objeto.imagen.url, Django devuelva automáticamente un link a Amazon o Google en lugar de una ruta local.
+CDN (Content Delivery Network): Para que las imágenes carguen rápido en todo el mundo, se usa una red de distribución 
+(como Cloudflare) que guarda copias de tus fotos en servidores cercanos al usuario.
+Seguridad: En producción, es vital configurar correctamente los permisos de lectura de la carpeta media para que solo 
+sean accesibles públicamente y no se puedan ejecutar scripts maliciosos allí.
+
+
+

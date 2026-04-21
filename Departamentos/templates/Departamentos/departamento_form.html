@@ -1,0 +1,13 @@
+<h2>Nuevo Departamento</h2>
+    
+   {% if mensaje %}
+        <div class="alert alert-warning" role="alert">
+        {{ mensaje }}
+        </div>
+    {% endif %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>

@@ -1,0 +1,5 @@
+{% for c in object_list %} 
+    <p>{{ c.inquilino }}</p>
+    {% empty %}
+    <p>No hay objetos</p>
+{% endfor %}    
