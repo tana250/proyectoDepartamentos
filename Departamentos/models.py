@@ -39,6 +39,6 @@ class Contrato(models.Model):
     def __str__(self):
         return f'{self.pdf} {self.inquilino} {self.monto} {self.inicio} {self.pago} {self.mantenimiento} {self.aumentos} {self.cancelacion} {self.pautas}'
 
-# class fotosDepartamento():
-#     imagen = models.ImageField(upload_to="uplaods/")
-#     departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
+class fotosDepartamento(models.Model):
+    foto = models.ImageField(upload_to="uploads/")
+    departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)

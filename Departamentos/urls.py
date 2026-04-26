@@ -7,6 +7,8 @@ urlpatterns = [
     path("ND/", views.nuevoDepartamento.as_view(), name="nuevoDepartamento"),
     path("VD/<int:pk>", views.verDepartamento.as_view(), name="verDepartamento"),
     path("ED/<int:pk>", views.editarDepartamento.as_view(), name="editarDepartamento"),
+    path("SF/", views.subirFoto.as_view(), name="subirFoto"),
+
     #____________________________________________________________________________________
     path("LC", views.listarContratos.as_view(), name="listarContrato"),
     path("NC/", views.nuevoContrato.as_view(), name="nuevoContrato"),
@@ -19,9 +21,4 @@ urlpatterns = [
     path("NI/", views.nuevoInquilino.as_view(), name="nuevoInquilino"),
     path("VI/<int:pk>", views.verInquilino.as_view(), name="verInquilino"),
     path("EI/<int:pk>", views.editarInquilino.as_view(), name="editarInquilino"),
-    
-
-
-
-#    path("uploads/str:img", views.getImg, name="getImg"), 
 ]

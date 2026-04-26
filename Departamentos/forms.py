@@ -36,11 +36,5 @@ class MultipleFileInput(forms.ClearableFileInput):
     allow_multiple_selected = True
 
 class FileFieldForm(forms.Form):
-    file_field = MultipleFileField()
-    titulo = forms.CharField()
-    
-
-# class editarDeptoForm(ModelForm):
-#     class Meta:
-#         model = Deptartamentos
-#         fields = ["Ubicacion", "CantHabitaciones", "Mobiliario", "servicios", "EstadoInicial"]
+    fotos = MultipleFileField()
+    departamento = forms.ModelChoiceField(queryset=Departamento.objects.all())
