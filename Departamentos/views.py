@@ -3,15 +3,17 @@ from django.views.generic.edit import CreateView, UpdateView, FormView
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.http import HttpResponse
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from .forms import DeptoForm, ContratoForm, InquilinoForm, FileFieldForm
 from .models import Departamento, Inquilino, Contrato, fotosDepartamento
 from .utils import guardarArchivo
 
 def home(request):
     return render(request, 'index.html')
-    
-class listarDepartamentos(ListView):
+
+class listarDepartamentos(PermissionRequiredMixin, ListView):
     model = Departamento
+    permission_required = "ComerPiza"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -49,7 +51,7 @@ class subirFoto(FormView):
         return super().form_valid(form)
 
 # _____________________________________________________________________
-    
+
 class listarContratos(ListView):
     model = Contrato
     template_name = 'Contratos/contrato_list.html'
@@ -67,7 +69,6 @@ class verContrato(DetailView):
     model = Contrato
     template_name = 'Contratos/contrato_detail.html'
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
@@ -84,7 +85,6 @@ class listarInquilinos(ListView):
     model = Inquilino
     template_name = 'Inquilinos/inquilino_list.html'
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
@@ -97,7 +97,6 @@ class nuevoInquilino(CreateView):
 class verInquilino(DetailView):
     model = Inquilino
     template_name = 'Inquilinos/inquilino_detail.html'
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

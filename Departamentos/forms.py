@@ -1,5 +1,5 @@
-from django.forms import ModelForm
 from .models import Departamento, Inquilino, Contrato
+from django.contrib.auth.models import User
 from django import forms
 
 class DeptoForm(forms.ModelForm):
@@ -12,11 +12,15 @@ class ContratoForm(forms.ModelForm):
     class Meta:
         model = Contrato
         fields = ["pdf", "inquilino", "monto", "inicio", "pago", "mantenimiento", "aumentos", "pautas", "cancelacion",]
+        widgets = {
+            'inicio': forms.DateInput(attrs={'type': 'date'}),
+            'pago': forms.DateInput(attrs={'type': 'date'}),
+        }
 
 class InquilinoForm(forms.ModelForm):
     class Meta:
         model = Inquilino
-        fields = ["nombre", "apellido", "dni", "telefono", "email", "telefonoAlt", "departamento"]
+        fields = ["user", "dni", "telefono", "telefonoAlt", "departamento"]
 
 
 class MultipleFileField(forms.FileField):

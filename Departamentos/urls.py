@@ -16,7 +16,6 @@ urlpatterns = [
     path("EC/<int:pk>", views.editarContrato.as_view(), name="editarContrato"),
 
     #____________________________________________________________________________________
-
     path("LI", views.listarInquilinos.as_view(), name="listarInquilino"),
     path("NI/", views.nuevoInquilino.as_view(), name="nuevoInquilino"),
     path("VI/<int:pk>", views.verInquilino.as_view(), name="verInquilino"),
