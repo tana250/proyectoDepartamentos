@@ -15,6 +15,7 @@ class Departamento(models.Model):
 
 class Inquilino(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    dni = models.IntegerField()
     telefono = models.IntegerField()
     telefonoAlt = models.IntegerField(blank=True,null=True)
     departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)

@@ -4,7 +4,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.http import HttpResponse
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from .forms import DeptoForm, ContratoForm, InquilinoForm, FileFieldForm
+from .forms import DeptoForm, ContratoForm, InquilinoForm, FileFieldForm, UserForm
 from .models import Departamento, Inquilino, Contrato, fotosDepartamento
 from .utils import guardarArchivo
 
@@ -89,11 +89,6 @@ class listarInquilinos(ListView):
         context = super().get_context_data(**kwargs)
         return context
 
-class nuevoInquilino(CreateView):
-    template_name = 'Inquilinos/inquilino_form.html'
-    form_class = InquilinoForm
-    success_url = '/gestion/'
-
 class verInquilino(DetailView):
     model = Inquilino
     template_name = 'Inquilinos/inquilino_detail.html'
@@ -107,4 +102,32 @@ class editarInquilino(UpdateView):
     model = Inquilino
     form_class = InquilinoForm
 
-        
+class registrarInquilino(CreateView):
+
+    def get(self, request):
+        user_form = UserForm()
+        inquilino_form = InquilinoForm()
+        return render(request, 'Inquilinos/inquilino_form.html', {
+            'user_form': user_form,
+            'inquilino_form': inquilino_form
+        })
+
+    def post(self, request):
+        user_form = UserForm(request.POST)
+        inquilino_form = InquilinoForm(request.POST)
+
+        if user_form.is_valid() and inquilino_form.is_valid():
+            user = user_form.save(commit=False)
+            user.set_password(user_form.cleaned_data['password'])
+            user.save()
+
+            inquilino = inquilino_form.save(commit=False)
+            inquilino.user = user
+            inquilino.save()
+
+            return redirect('home')
+
+        return render(request, 'Inquilinos/inquilino_form.html', {
+            'user_form': user_form,
+            'inquilino_form': inquilino_form
+        })

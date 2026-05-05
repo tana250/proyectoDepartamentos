@@ -17,7 +17,7 @@ urlpatterns = [
 
     #____________________________________________________________________________________
     path("LI", views.listarInquilinos.as_view(), name="listarInquilino"),
-    path("NI/", views.nuevoInquilino.as_view(), name="nuevoInquilino"),
+    path("RI/", views.registrarInquilino.as_view(), name="registrarInquilino"),
     path("VI/<int:pk>", views.verInquilino.as_view(), name="verInquilino"),
     path("EI/<int:pk>", views.editarInquilino.as_view(), name="editarInquilino"),
 ]

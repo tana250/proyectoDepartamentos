@@ -20,7 +20,25 @@ class ContratoForm(forms.ModelForm):
 class InquilinoForm(forms.ModelForm):
     class Meta:
         model = Inquilino
-        fields = ["user", "dni", "telefono", "telefonoAlt", "departamento"]
+        fields = ["dni", "telefono", "telefonoAlt", "departamento"]
+
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput, label="Contraseña")
+    password2 = forms.CharField(widget=forms.PasswordInput, label="Confirmar contraseña")
+
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email', 'password']
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        password2 = cleaned_data.get("password2")
+
+        if password and password2 and password != password2:
+            raise forms.ValidationError("Las contraseñas no coinciden")
+
+        return cleaned_data
 
 
 class MultipleFileField(forms.FileField):
